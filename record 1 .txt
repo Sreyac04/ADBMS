@@ -1,0 +1,56 @@
+1.Create a table EMPLOYEE have the following fields (emp_id, name,city,dob,adhar_no)
+
+mysql> create table EMPLOYEE(emp_id varchar(10),name varchar(10),city varchar(10),dob date,adhar_no int);
+
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| emp_id   | varchar(10) | YES  |     | NULL    |       |
+| name     | varchar(10) | YES  |     | NULL    |       |
+| city     | varchar(10) | YES  |     | NULL    |       |
+| dob      | date        | YES  |     | NULL    |       |
+| adhar_no | int         | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+2.      Create a table STUDENT have the fields(roll_no, name, age, address, gender)and add following constraints on it.
+Roll_no – Primary key,Name – does not allow null values, Age- must be in between (0-99), does not allow null values, Gender- default value is ‘m’
+
+mysql> create table STUDENT(roll_no int primary key,name varchar(10) not null,age int not null check(age between 0 and 99),address varchar(20),gender varchar(10) default 'm');
+
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| roll_no | int         | NO   | PRI | NULL    |       |
+| name    | varchar(10) | NO   |     | NULL    |       |
+| age     | int         | NO   |     | NULL    |       |
+| address | varchar(20) | YES  |     | NULL    |       |
+| gender  | varchar(10) | YES  |     | m       |       |
++---------+-------------+------+-----+---------+-------+
+
+3.Create a temporary table STUDENT1 of STUDENT relation.
+
+mysql> create temporary table STUDENT1 as select* from STUDENT;
+
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| roll_no | int         | NO   |     | NULL    | NULL  |
+| name    | varchar(10) | NO   |     | NULL    | NULL  |
+| age     | int         | NO   |     | NULL    | NULL  |
+| address | varchar(20) | YES  |     | NULL    | NULL  |
+| gender  | varchar(10) | YES  |     | m       | NULL  |
++---------+-------------+------+-----+---------+-------+
+
+4.Create a duplicate table of EMPLOYEE.
+
+mysql> create table EMPLOYEE_DUPLICATE as select * from EMPLOYEE;
+
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| emp_id   | varchar(10) | YES  |     | NULL    |       |
+| name     | varchar(10) | YES  |     | NULL    |       |
+| city     | varchar(10) | YES  |     | NULL    |       |
+| dob      | date        | YES  |     | NULL    |       |
+| adhar_no | int         | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+
