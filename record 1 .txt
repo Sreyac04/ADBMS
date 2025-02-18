@@ -54,3 +54,5 @@ mysql> create table EMPLOYEE_DUPLICATE as select * from EMPLOYEE;
 | adhar_no | int         | YES  |     | NULL    |       |
 +----------+-------------+------+-----+---------+-------+
 
+//RESUBMIT
+add Question for pgm 2
