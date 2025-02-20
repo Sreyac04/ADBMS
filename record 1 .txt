@@ -11,8 +11,12 @@ mysql> create table EMPLOYEE(emp_id varchar(10),name varchar(10),city varchar(10
 | dob      | date        | YES  |     | NULL    |       |
 | adhar_no | int         | YES  |     | NULL    |       |
 +----------+-------------+------+-----+---------+-------+
-2.      Create a table STUDENT have the fields(roll_no, name, age, address, gender)and add following constraints on it.
-Roll_no – Primary key,Name – does not allow null values, Age- must be in between (0-99), does not allow null values, Gender- default value is ‘m’
+2.Create a table STUDENT have the fields(roll_no, name, age, address, gender)and add following constraints on it.
+	Roll_no – Primary key
+	Name – does not allow null values
+	Age- must be in between (0-99) 
+	does not allow null values
+	Gender- default value is ‘m’
 
 mysql> create table STUDENT(roll_no int primary key,name varchar(10) not null,age int not null check(age between 0 and 99),address varchar(20),gender varchar(10) default 'm');
 
@@ -54,5 +58,3 @@ mysql> create table EMPLOYEE_DUPLICATE as select * from EMPLOYEE;
 | adhar_no | int         | YES  |     | NULL    |       |
 +----------+-------------+------+-----+---------+-------+
 
-//RESUBMIT
-add Question for pgm 2
