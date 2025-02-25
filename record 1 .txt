@@ -58,3 +58,4 @@ mysql> create table EMPLOYEE_DUPLICATE as select * from EMPLOYEE;
 | adhar_no | int         | YES  |     | NULL    |       |
 +----------+-------------+------+-----+---------+-------+
 
+//VERIFIED
