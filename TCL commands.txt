@@ -1,0 +1,138 @@
+mysql> create table student(roll int,name varchar(10));
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> insert into student values(1,'sreya'),(2,'soja'),(3,'anjana');
+Query OK, 3 rows affected (0.00 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> select * from student;
++------+--------+
+| roll | name   |
++------+--------+
+|    1 | sreya  |
+|    2 | soja   |
+|    3 | anjana |
++------+--------+
+3 rows in set (0.00 sec)
+
+mysql> set autocommit=off;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> insert into student values(4,'nada'),(5,'hudha');
+Query OK, 2 rows affected (0.00 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> select * from student;
++------+--------+
+| roll | name   |
++------+--------+
+|    1 | sreya  |
+|    2 | soja   |
+|    3 | anjana |
+|    4 | nada   |
+|    5 | hudha  |
++------+--------+
+5 rows in set (0.00 sec)
+
+mysql> select * from student;
++------+--------+
+| roll | name   |
++------+--------+
+|    1 | sreya  |
+|    2 | soja   |
+|    3 | anjana |
++------+--------+
+3 rows in set (0.00 sec)
+
+mysql> commit;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> set autocommit=off;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> insert into student values(6,'sree');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> savepoint s1;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> insert into student values(7,'sandra');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> savepoint s2;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> insert into student values(8,'mandra');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> savepoint s3;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> rollback to s2;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> select * from student;
++------+--------+
+| roll | name   |
++------+--------+
+|    1 | sreya  |
+|    2 | soja   |
+|    3 | anjana |
+|    4 | nada   |
+|    5 | hudha  |
+|    6 | sree   |
+|    7 | sandra |
++------+--------+
+7 rows in set (0.00 sec)
+
+
+mysql> use INVOICE;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+
+mysql> create user 'user1@localhost' identified by 'user@123';
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> create user 'user2@localhost' identified by 'user@123';
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> grant insert ,delete on customer to 'user1@localhost';
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> show grants for 'user1@localhost';
++-----------------------------------------------------------------------+
+| Grants for user1@localhost@%                                          |
++-----------------------------------------------------------------------+
+| GRANT USAGE ON *.* TO `user1@localhost`@`%`                           |
+| GRANT INSERT, DELETE ON `INVOICE`.`customer` TO `user1@localhost`@`%` |
++-----------------------------------------------------------------------+
+2 rows in set (0.00 sec)
+
+mysql> grant update, delete on INVOICE.* to 'user2@localhost';
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> show grants for 'user2@localhost';
++--------------------------------------------------------------+
+| Grants for user2@localhost@%                                 |
++--------------------------------------------------------------+
+| GRANT USAGE ON *.* TO `user2@localhost`@`%`                  |
+| GRANT UPDATE, DELETE ON `INVOICE`.* TO `user2@localhost`@`%` |
++--------------------------------------------------------------+
+2 rows in set (0.00 sec)
+
+ mysql> revoke delete on INVOICE.* from 'user2@localhost';
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> show grants for 'user2@localhost';
++------------------------------------------------------+
+| Grants for user2@localhost@%                         |
++------------------------------------------------------+
+| GRANT USAGE ON *.* TO `user2@localhost`@`%`          |
+| GRANT UPDATE ON `INVOICE`.* TO `user2@localhost`@`%` |
++------------------------------------------------------+
+2 rows in set (0.00 sec)
+
+
+
