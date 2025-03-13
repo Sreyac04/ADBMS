@@ -1,0 +1,89 @@
+b) OPTIMIZING DATABASE:  (GROUP BY, AGGREGATE FUNCTIONS)
+
+1.List product name, price except soap on price order. 
+
+mysql> insert product values(1,"soap",60);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from product;
++-----+-----------+-------+
+| pid | pname     | price |
++-----+-----------+-------+
+| 1   | soap      |    60 |
+| 100 | pen       |    51 |
+| 101 | scale     |    61 |
+| 102 | eraser    |   133 |
+| 103 | pencil    |    92 |
+| 104 | sharpener |   102 |
+| 105 | box       |   153 |
++-----+-----------+-------+
+7 rows in set (0.00 sec)
+
+mysql> select pname,price from product where pname not like '%soap' order by price;
++-----------+-------+
+| pname     | price |
++-----------+-------+
+| pen       |    51 |
+| scale     |    61 |
+| pencil    |    92 |
+| sharpener |   102 |
+| eraser    |   133 |
+| box       |   153 |
++-----------+-------+
+6 rows in set (0.00 sec)
+
+
+2. Find minimum, maximum and average price of products. 
+
+mysql> select min(price) as min_price,max(price) as max_price,avg(price) as average_price from product;
++-----------+-----------+---------------+
+| min_price | max_price | average_price |
++-----------+-----------+---------------+
+|        51 |       153 |       93.1429 |
++-----------+-----------+---------------+
+
+
+3.Find number of customers in each city. 
+
+mysql> select count(*) from customer;
++----------+
+| count(*) |
++----------+
+|        4 |
++----------+
+1 row in set (0.00 sec)
+
+
+
+4.Find number of customers in each city, only include city with more than 3 customers.
+
+mysql> insert into customer values(10002,"sandra","puthiyangadi","kollam","8089260518"),(10006,"sneha","puthiyara","kollam","7736233570");
+Query OK, 2 rows affected (0.01 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> select city,count(*) as no_ofcustomers from customer group by city having count(*)>3;
++--------+----------------+
+| city   | no_ofcustomers |
++--------+----------------+
+| kollam |              4 |
++--------+----------------+
+1 row in set (0.01 sec)
+
+
+
+5. Show data as displayed ‘who, where’ Eg: ‘customer1 lives in ekm’
+
+mysql> select concat(name," in ",city)as who_where from customer;
++---------------------+
+| who_where           |
++---------------------+
+| sreya in kollam     |
+| sandra in kollam    |
+| anjana in ernakulam |
+| nada in kollam      |
+| hudha in kottayam   |
+| sneha in kollam     |
++---------------------+
+6 rows in set (0.00 sec)
+
+                                     
