@@ -1,0 +1,129 @@
+a) ACCESSING DATABASE:  (SELECT, Filtering using WHERE, ORDER BY Clauses)
+1.    List all invoice items, avoid duplicates. 
+
+mysql> select * from invoice_item;
++--------+------+----------+
+| inv_id | prid | quantity |
++--------+------+----------+
+|      5 | 104  |        6 |
+|      1 | 100  |        2 |
+|      3 | 103  |        3 |
+|      4 | 104  |        4 |
+|      4 | 103  |        4 |
++--------+------+----------+
+5 rows in set (0.00 sec)
+
+mysql> select distinct quantityfrom invoice_item;
+ERROR 1054 (42S22): Unknown column 'quantityfrom' in 'field list'
+mysql> select distinct quantity from invoice_item;
++----------+
+| quantity |
++----------+
+|        6 |
+|        2 |
+|        3 |
+|        4 |
++----------+
+4 rows in set (0.00 sec)
+
+
+2.  List the invoice details from 1st January 2024 to 31st march 2024 
+
+mysql> select * from invoice_master;
++--------+---------+------------+
+| inv_id | cust_id | inv_date   |
++--------+---------+------------+
+|      1 | 10001   | 2023-01-01 |
+|      3 | 10003   | 2024-03-23 |
+|      4 | 10004   | 2024-10-04 |
+|      5 | 10005   | 2024-12-05 |
++--------+---------+------------+
+4 rows in set (0.00 sec)
+
+mysql> select * from invoice_master where inv_date between '2024-01-01' and '2024-03-31';
++--------+---------+------------+
+| inv_id | cust_id | inv_date   |
++--------+---------+------------+
+|      3 | 10003   | 2024-03-23 |
++--------+---------+------------+
+1 row in set (0.00 sec)
+
+
+3.  List the customer details who not live in ‘tvm’. 
+mysql> select * from customer where city != "tvm";
++-------+--------+------------+-----------+------------+
+| id    | name   | address    | city      | ph_no      |
++-------+--------+------------+-----------+------------+
+| 10001 | sreya  | puthiyappa | kollam    | 2347614985 |
+| 10003 | anjana | kotooli    | ernakulam | 7642820677 |
+| 10004 | nada   | balussery  | kollam    | NULL       |
+| 10005 | hudha  | pallazhi   | kottayam  | NULL       |
++-------+--------+------------+-----------+------------+
+4 rows in set (0.00 sec)
+
+4.  List the customers who have no phone number. 
+
+mysql> select name from customer where ph_no is null;
++-------+
+| name  |
++-------+
+| nada  |
+| hudha |
++-------+
+
+5.Display customer names in descending order. 
+
+mysql> select name from customer order by name desc;
++--------+
+| name   |
++--------+
+| sreya  |
+| nada   |
+| hudha  |
+| anjana |
++--------+
+
+6. Display the customer details sorted in ascending by city and descending by names. 
+
+mysql> select * from customer order by city asc,name desc;
++-------+--------+------------+-----------+------------+
+| id    | name   | address    | city      | ph_no      |
++-------+--------+------------+-----------+------------+
+| 10003 | anjana | kotooli    | ernakulam | 7642820677 |
+| 10001 | sreya  | puthiyappa | kollam    | 2347614985 |
+| 10004 | nada   | balussery  | kollam    | NULL       |
+| 10005 | hudha  | pallazhi   | kottayam  | NULL       |
++-------+--------+------------+-----------+------------+
+4 rows in set (0.00 sec)
+
+7.Find the customer names who have ‘e’ or ‘a’ in them and at least 3 characters in length
+
+mysql> select name from customer where (name like '%e%' or name like '%a%') and length(name)>=3;
++--------+
+| name   |
++--------+
+| sreya  |
+| anjana |
+| nada   |
+| hudha  |
++--------+
+4 rows in set (0.00 sec)
+
+
+8. List the names of customers their names have ‘r’ in second position.
+
+mysql> select name from customer where name like '_r%';
++-------+
+| name  |
++-------+
+| sreya |
++-------+
+1 row in set (0.00 sec)
+
+
+
+
+
+
+
+
