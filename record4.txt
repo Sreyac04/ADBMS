@@ -120,7 +120,7 @@ mysql> select name from customer where name like '_r%';
 +-------+
 1 row in set (0.00 sec)
 
-
+//VERIFIED
 
 
 
