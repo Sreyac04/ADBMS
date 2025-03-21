@@ -98,5 +98,6 @@ mysql> select customer.name FROM customer, invoice_master, invoice_item where cu
 1 row in set (0.00 sec)
 
 
-
+//resubmit
+//6th one not subquery
 
