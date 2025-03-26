@@ -55,4 +55,4 @@ mysql> select c.*,im.inv_id,im.inv_date from customer c left join invoice_master
 
 
 
-                                                                         
+    //VERIFIED                                                                     
