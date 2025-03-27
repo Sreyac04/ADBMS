@@ -1,0 +1,54 @@
+OPTIMIZING DATABASE: (Using Set, arithmetic, logical and special operators)
+
+1.Display customer_id, city  who lives either in ‘CLT’ or in ‘TVM’
+
+mysql> select id as customer_id,city from customer where city in("calicut","tvm");
++-------------+---------+
+| customer_id | city    |
++-------------+---------+
+| 10005       | tvm     |
+| 10006       | calicut |
++-------------+---------+
+2 rows in set (0.00 sec)
+
+2.Display product details with an updated price amount(new price= old price+5rs)
+
+mysql> select *,(price + 5) AS new_price from product;
++-----+-----------+-------+-----------+
+| pid | pname     | price | new_price |
++-----+-----------+-------+-----------+
+| 1   | soap      |    60 |        65 |
+| 100 | pen       |    51 |        56 |
+| 101 | scale     |    61 |        66 |
+| 102 | eraser    |   133 |       138 |
+| 103 | pencil    |    92 |        97 |
+| 104 | sharpener |   102 |       107 |
+| 105 | box       |   153 |       158 |
++-----+-----------+-------+-----------+
+7 rows in set (0.00 sec)
+
+3. Display customer details who doesn’t have phone number and lives in ‘Calicut’ city (use logical operators)
+
+mysql> update customer set city="calicut" where id=10005;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from customer where ph_no is null and city="calicut";
++-------+-------+----------+---------+-------+
+| id    | name  | address  | city    | ph_no |
++-------+-------+----------+---------+-------+
+| 10005 | hudha | pallazhi | calicut | NULL  |
++-------+-------+----------+---------+-------+
+1 row in set (0.00 sec)
+
+4. List the product names if it finds any records in the invoice items table has quantity =3 (use special operators)
+
+mysql>  select pname from product where pid in(select prid from invoice_item where quantity = 3);
++--------+
+| pname  |
++--------+
+| pencil |
++--------+
+1 row in set (0.01 sec)
+
+
