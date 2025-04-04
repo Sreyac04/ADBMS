@@ -22,4 +22,4 @@ mysql> SELECT pname,price_range(price) AS price_range FROM product//
 +-----------+-------------+
 7 rows in set (0.00 sec)
 
-
+//VERIFIED
