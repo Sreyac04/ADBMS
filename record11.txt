@@ -39,4 +39,4 @@ mysql> SELECT @NAME_LIST; $$
 
 mysql> 
 
-
+//VERIFIED
