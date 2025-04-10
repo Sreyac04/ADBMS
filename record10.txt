@@ -58,5 +58,5 @@ mysql> select * from product $$
 +-----+-----------+-------+
 8 rows in set (0.01 sec)
 
-
+//VERIFIED
 
