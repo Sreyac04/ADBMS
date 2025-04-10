@@ -1,0 +1,62 @@
+RECORD PROGRAM 10: PL/SQL -TRIGGER
+
+1.Create a trigger to handle updates to the customer table.
+
+mysql> create table cust(id int,name varchar(20),address varchar(20),city varchar(10),ph_no varchar(20)) $$
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> desc cust $$
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| id      | int         | YES  |     | NULL    |       |
+| name    | varchar(20) | YES  |     | NULL    |       |
+| address | varchar(20) | YES  |     | NULL    |       |
+| city    | varchar(10) | YES  |     | NULL    |       |
+| ph_no   | varchar(20) | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> create trigger c_trigg after update on customer for each row begin insert into cust set id=old.id,name=old.name,address=old.address,city=old.city,ph_no=old.ph_no;end $$
+Query OK, 0 rows affected (0.01 sec)
+
+mysql>  update cust set city="Idukki" where id=10005 $$
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from cust $$
++-------+---------+-----------+--------+------------+
+| id    | name    | address   | city   | ph_no      |
++-------+---------+-----------+--------+------------+
+| 10005 | keerthi | puthiyara | Idukki | 1234567890 |
++-------+---------+-----------+--------+------------+
+1 row in set (0.00 sec)
+
+
+
+2.Create a trigger to handle inserts to the product relation ( if price < 5 the set price to 10).
+
+
+mysql> create trigger p_trig before insert on product for each row begin if new.price<5 then set new.price=10; end if; end $$
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> insert into product values('106',"gum",4) $$
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from product $$
++-----+-----------+-------+
+| pid | pname     | price |
++-----+-----------+-------+
+| 1   | soap      |    60 |
+| 100 | pen       |    51 |
+| 101 | scale     |    61 |
+| 102 | eraser    |   133 |
+| 103 | pencil    |    92 |
+| 104 | sharpener |   102 |
+| 105 | box       |   153 |
+| 106 | gum       |    10 |
++-----+-----------+-------+
+8 rows in set (0.01 sec)
+
+
+
