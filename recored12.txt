@@ -1,0 +1,117 @@
+RECORD PROGRAM 12: NoSQL CRUD
+
+1.Write a MongoDB query to create an INVOICE database and collections (CUSTOMER, PRODUCT) and its corresponding documents.
+
+test> use INVOICE;
+switched to db INVOICE
+INVOICE> db.Customer.insert({cid:'1001',cname:"sreya",city:"calicut",phno:"7907941001"})
+{
+  acknowledged: true,
+  insertedIds: { '0': ObjectId('67ff71c4dc90c0667e544cab') }
+}
+INVOICE> db.Customer.insert({cid:'1002',cname:"keerthi",city:"kochi",phno:"7736233570"})
+{
+  acknowledged: true,
+  insertedIds: { '0': ObjectId('67ff71e3dc90c0667e544cac') }
+}
+INVOICE> db.Customer.insert({cid:'1003',cname:"sneha",city:"trivandrum",phno:"8089260518"})
+{
+  acknowledged: true,
+  insertedIds: { '0': ObjectId('67ff720adc90c0667e544cad') }
+}
+INVOICE> db.Customer.insert({cid:'1004',cname:"sandra",city:"kottayam",phno:"9539403570"})
+{
+  acknowledged: true,
+  insertedIds: { '0': ObjectId('67ff722cdc90c0667e544cae') }
+}
+
+
+
+
+
+
+
+INVOICE> db.PRODUCT.insert({pid:101,pname:"Soap",price:60})
+{
+  acknowledged: true,
+  insertedIds: { '0': ObjectId('67ff724adc90c0667e544caf') }
+}
+INVOICE> db.PRODUCT.insert({pid:102,pname:"Surf Excel",price:100})
+{
+  acknowledged: true,
+  insertedIds: { '0': ObjectId('67ff7279dc90c0667e544cb0') }
+}
+INVOICE>  db.PRODUCT.insert({pid:103,pname:"Eracer",price:5})
+{
+  acknowledged: true,
+  insertedIds: { '0': ObjectId('67ff7289dc90c0667e544cb1') }
+}
+INVOICE> db.PRODUCT.insert({pid:104,pname:"Bedsheet",price:180})
+{
+  acknowledged: true,
+  insertedIds: { '0': ObjectId('67ff729adc90c0667e544cb2') }
+}
+
+
+
+2. Write a MongoDB query to find all documents from the collection CUSTOMER 
+
+
+INVOICE> db.Customer.find()
+[
+  {
+    _id: ObjectId('67ff71c4dc90c0667e544cab'),
+    cid: '1001',
+    cname: 'sreya',
+    city: 'calicut',
+    phno: '7907941001'
+  },
+  {
+    _id: ObjectId('67ff71e3dc90c0667e544cac'),
+    cid: '1002',
+    cname: 'keerthi',
+    city: 'kochi',
+    phno: '7736233570'
+  },
+  {
+    _id: ObjectId('67ff720adc90c0667e544cad'),
+    cid: '1003',
+    cname: 'sneha',
+    city: 'trivandrum',
+    phno: '8089260518'
+  },
+  {
+    _id: ObjectId('67ff722cdc90c0667e544cae'),
+    cid: '1004',
+    cname: 'sandra',
+    city: 'kottayam',
+    phno: '9539403570'
+  }
+]
+
+
+
+
+3. Write a MongoDB query to update the city in the collection CUSTOMER.
+
+
+INVOICE> db.Customer.update({cid:'1001'},{$set:{city:'Banglore'}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+
+
+
+4. Write a MongoDB query to delete the first matched document whose city is "trivandrum".
+
+
+INVOICE> db.Customer.deleteOne({ city: "trivandrum" })
+{ acknowledged: true, deletedCount: 1 }
+
+
+
+
