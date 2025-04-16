@@ -1,0 +1,88 @@
+RECORD PROGRAM 13: NoSQL- RETRIEVING DATA
+
+1.Write a MongoDB query to display the customer documents having city ‘kochi’,’tvm’. 
+
+
+INVOICE> db.Customer.insert({cid:'1005',cname:"mandra",city:"tvm",phno:"1234567890"})
+{
+  acknowledged: true,
+  insertedIds: { '0': ObjectId('67ff7632dc90c0667e544cb3') }
+}
+
+
+
+INVOICE>  db.Customer.find({ city: { $in: ['kochi', 'tvm'] } }).pretty()
+[
+  {
+    _id: ObjectId('67ff71e3dc90c0667e544cac'),
+    cid: '1002',
+    cname: 'keerthi',
+    city: 'kochi',
+    phno: '7736233570'
+  },
+  {
+    _id: ObjectId('67ff7632dc90c0667e544cb3'),
+    cid: '1005',
+    cname: 'mandra',
+    city: 'tvm',
+    phno: '1234567890'
+  }
+]
+
+
+
+2.Write a MongoDB query to display all product documents their price >50.
+
+INVOICE> db.PRODUCT.find({ price: { $gt: 50 } })
+[
+  {
+    _id: ObjectId('67ff724adc90c0667e544caf'),
+    pid: 101,
+    pname: 'Soap',
+    price: 60
+  },
+  {
+    _id: ObjectId('67ff7279dc90c0667e544cb0'),
+    pid: 102,
+    pname: 'Surf Excel',
+    price: 100
+  },
+  {
+    _id: ObjectId('67ff729adc90c0667e544cb2'),
+    pid: 104,
+    pname: 'Bedsheet',
+    price: 180
+  }
+]
+
+
+
+3. Write a MongoDB query to find customer documents who not live in ‘tvm’.
+
+
+
+INVOICE> db.Customer.find({ city: { $ne: 'tvm' } })
+[
+  {
+    _id: ObjectId('67ff71c4dc90c0667e544cab'),
+    cid: '1001',
+    cname: 'sreya',
+    city: 'Banglore',
+    phno: '7907941001'
+  },
+  {
+    _id: ObjectId('67ff71e3dc90c0667e544cac'),
+    cid: '1002',
+    cname: 'keerthi',
+    city: 'kochi',
+    phno: '7736233570'
+  },
+  {
+    _id: ObjectId('67ff722cdc90c0667e544cae'),
+    cid: '1004',
+    cname: 'sandra',
+    city: 'kottayam',
+    phno: '9539403570'
+  }
+]
+
