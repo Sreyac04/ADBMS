@@ -1,0 +1,39 @@
+RECORD PROGRAM 15: NoSQL - ADMINISTRATION & SHELL COMMANDS
+
+1.  Write a MongoDB query to create a user “CUSTOMER1” and grant the read role in the INVOICE database.
+
+
+INVOICE>  db.createUser({user:"CUSTOMER1",pwd:"1234",roles:[{role:"read",db:"INVOICE"}]});
+{ ok: 1 }
+
+
+2.  Write a MongoDB query to create the backup for the INVOICE database.
+
+mongodump --db=INVOICE --out=~/invoice_backup
+2025-04-22T15:38:32.997+0530	writing INVOICE.customers to ~/invoice_backup/INVOICE/customers.bson
+2025-04-22T15:38:32.997+0530	writing INVOICE.PRODUCT to ~/invoice_backup/INVOICE/PRODUCT.bson
+2025-04-22T15:38:32.997+0530	writing INVOICE.Customer to ~/invoice_backup/INVOICE/Customer.bson
+2025-04-22T15:38:32.998+0530	done dumping INVOICE.PRODUCT (4 documents)
+2025-04-22T15:38:32.998+0530	done dumping INVOICE.Customer (9 documents)
+2025-04-22T15:38:33.000+0530	done dumping INVOICE.customers (8 documents)
+2025-04-22T15:38:33.001+0530	writing INVOICE.CUSTOMER to ~/invoice_backup/INVOICE/CUSTOMER.bson
+2025-04-22T15:38:33.002+0530	done dumping INVOICE.CUSTOMER (4 documents)
+
+
+
+3.  Write a MongoDB query to restore a particular database or a collection.
+
+
+mongorestore --db INVOICE /home/ksb/~/home/ksb/~/invoice_backup/
+2025-04-22T15:44:33.990+0530	The --db and --collection flags are deprecated for this use-case; please use --nsInclude instead, i.e. with --nsInclude=${DATABASE}.${COLLECTION}
+2025-04-22T15:44:33.991+0530	Failed: mongorestore target '/home/ksb/~/home/ksb/~/invoice_backup/' invalid: stat /home/ksb/~/home/ksb/~/invoice_backup/: no such file or directory
+2025-04-22T15:44:33.991+0530	0 document(s) restored successfully. 0 document(s) failed to restore.
+
+
+
+
+4.  Write a MongoDB query to create an index for the collection customer using the field customer_name.
+
+INVOICE> db.CUSTOMER.createIndex({ cname: 1 })
+cname_1
+
