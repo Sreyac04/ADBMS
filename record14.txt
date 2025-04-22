@@ -1,0 +1,108 @@
+RECORD PROGRAM 14: NoSQL - AGGREGATE FUNCTIONS AND REGULAR EXPRESSIONS
+
+1. Write a MongoDB query to sort customer details in ascending order of their name.
+
+
+INVOICE>  db.Customer.find().sort({ cname: 1 })
+[
+  {
+    _id: ObjectId('67ff71e3dc90c0667e544cac'),
+    cid: '1002',
+    cname: 'keerthi',
+    city: 'kochi',
+    phno: '7736233570'
+  },
+  {
+    _id: ObjectId('67ff7632dc90c0667e544cb3'),
+    cid: '1005',
+    cname: 'mandra',
+    city: 'tvm',
+    phno: '1234567890'
+  },
+  {
+    _id: ObjectId('67ff722cdc90c0667e544cae'),
+    cid: '1004',
+    cname: 'sandra',
+    city: 'kottayam',
+    phno: '9539403570'
+  },
+  {
+    _id: ObjectId('67ff71c4dc90c0667e544cab'),
+    cid: '1001',
+    cname: 'sreya',
+    city: 'Banglore',
+    phno: '7907941001'
+  }
+]
+
+
+
+
+2. Write a MongoDB query to count number of customers in each city.
+
+INVOICE> db.Customer.aggregate([{$group:{_id:"$city",CUSTOMERCount:{$sum:1}}}])
+[
+  { _id: 'kochi', CUSTOMERCount: 1 },
+  { _id: 'kottayam', CUSTOMERCount: 1 },
+  { _id: 'tvm', CUSTOMERCount: 1 },
+  { _id: 'Banglore', CUSTOMERCount: 1 }
+]
+
+
+
+
+
+3. Write a MongoDB query to find minimum and maximum age in each city.
+
+
+INVOICE> db.Customer.aggregate([ { $group: { _id: "$city", minAge: { $min: "$age" }, maxAge: { $max: "$age" } } }] )
+[
+  { _id: 'Banglore', minAge: 21, maxAge: 32 },
+  { _id: 'tvm', minAge: 23, maxAge: 24 },
+  { _id: 'kochi', minAge: 25, maxAge: 28 },
+  { _id: 'kottayam', minAge: 33, maxAge: 36 }
+]
+
+
+4. Write a MongoDB query using the $match stage to retrieve all customer documents whose customer_name starts with the letter “S”.
+
+INVOICE> db.Customer.aggregate([{ $match: { cname: { $regex: "^s" } } }] )
+[
+  {
+    _id: ObjectId('67ff71c4dc90c0667e544cab'),
+    cid: '1001',
+    cname: 'sreya',
+    city: 'Banglore',
+    phno: '7907941001',
+    age: 21
+  },
+  {
+    _id: ObjectId('67ff722cdc90c0667e544cae'),
+    cid: '1004',
+    cname: 'sandra',
+    city: 'kottayam',
+    phno: '9539403570',
+    age: 36
+  },
+  {
+    _id: ObjectId('67ff850cdc90c0667e544cbe'),
+    cid: '1016',
+    cname: 'sharon',
+    city: 'kottayam',
+    phno: '9876543214',
+    age: 33
+  }
+]
+
+
+
+5. Write a query using $lookup to join CUSTOMER and PRODUCT collections and display only customer name, product name, and price.
+
+INVOICE>  db.Customer.aggregate([ { $lookup: { from: "PRODUCT", localField: "pid", foreignField: "pid", as: "productDetails" } }, { $unwind: "$productDetails" }, { $project: { _id: 0, cname: 1, pname: "$productDetails.pname", price: "$productDetails.price" } }] )
+[
+  { cname: 'sreya', pname: 'Soap', price: 60 },
+  { cname: 'sreya', pname: 'Surf Excel', price: 100 },
+  { cname: 'keerthi', pname: 'Eracer', price: 5 },
+  { cname: 'keerthi', pname: 'Bedsheet', price: 180 }
+]
+
