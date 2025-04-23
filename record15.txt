@@ -36,4 +36,5 @@ mongorestore --db INVOICE /home/ksb/~/home/ksb/~/invoice_backup/
 
 INVOICE> db.CUSTOMER.createIndex({ cname: 1 })
 cname_1
-
+//RESUBMIT
+DISPLAY INDEX
